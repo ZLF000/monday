@@ -6,15 +6,18 @@ use think\Db;
 
 class Index extends Controller
 {
-    public function index()
-    {
-        $list = Db::table('user_detail')->select();
 
-        $this->assign('list', $list);
+    public function index() {
+
         return $this->fetch();
+
     }
 
-    public function test() {
-        echo 132;
+    public function getData() {
+        $id = $_GET['id'];
+
+        $list = Db::table('user_detail')->where('id', $id)->select();
+
+        return sucReturn(200, 'succcess', $list);
     }
 }

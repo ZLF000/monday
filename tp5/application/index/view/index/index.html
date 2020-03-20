@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script>
+    getData();
+</script>
 <body>
     <table>
         <thead>
@@ -22,4 +25,22 @@
     </table>
 </body>
 <script src="__STATIC__/jquery-3.4.1.js"></script>
+<script>
+
+    function getData() {
+        $.ajax({
+            url: '/index/index/getData',
+            data: {
+                'id': 1
+            },
+            type: 'get',
+            dataType: 'json',
+            success:function (res) {
+                console.log(res);
+            }
+
+        })
+    }
+
+</script>
 </html>

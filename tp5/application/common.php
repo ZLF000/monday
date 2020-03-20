@@ -10,3 +10,23 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+
+function sucReturn($code, $message, $data = []) {
+
+    return json_encode([
+        'code' => $code,
+        'message' => $message,
+        'data' => $data
+    ]);
+
+}
+
+function errReturn($code, $message) {
+
+    return json_encode([
+        'code' => $code,
+        'message' => $message
+    ]);
+
+}
