@@ -13,4 +13,8 @@ class Index extends Controller
         $this->assign('list', $list);
         return $this->fetch();
     }
+
+    public function test() {
+        echo 132;
+    }
 }
