@@ -9,6 +9,7 @@ class Index
     {
         $list = Db::table('user_detail')->select();
 
-        var_dump($list);
+        $this->assign('list', $list);
+        return $this->fetch();
     }
 }
