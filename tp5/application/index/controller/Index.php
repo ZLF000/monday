@@ -23,7 +23,8 @@ class Index extends Controller
             'merchantId' => $merchantId,
             'productId' => $productId,
             'amount' => $amount,
-            'sign' => $sign
+            'callbackUrl' => '',
+            'sign' => $sign,
         ];
 
         $ch = curl_init();
