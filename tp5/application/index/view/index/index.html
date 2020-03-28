@@ -1,45 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{$title}</title>
+    {include file="public/headerCss" /}
 </head>
-<body>
-    <table>
-        <thead>
-            <tr>
-                <td>id</td>
-                <td>姓名</td>
-                <td>性别</td>
-                <td>身份证号</td>
-            </tr>
-        </thead>
-        <tbody id="data">
-            <tr>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">易支付管理系统</div>
+        <ul class="layui-nav layui-layout-left">
+<!--            <li class="layui-nav-item"><a href="">控制台</a></li>-->
+<!--            <li class="layui-nav-item"><a href="">商品管理</a></li>-->
+<!--            <li class="layui-nav-item"><a href="">用户</a></li>-->
+<!--            <li class="layui-nav-item">-->
+<!--                <a href="javascript:;">其它系统</a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                    <dd><a href="">邮件管理</a></dd>-->
+<!--                    <dd><a href="">消息管理</a></dd>-->
+<!--                    <dd><a href="">授权管理</a></dd>-->
+<!--                </dl>-->
+<!--            </li>-->
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {$Think.session.adminInfo.account}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/index/login/logout">退出</a></li>
+        </ul>
+    </div>
+
+    <div id="hxNavbar"></div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <iframe id="iFrame1" src="/index/home/index" width="100%" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+    {include file="public/footer" /}
+</div>
 </body>
-<script src="__STATIC__/jquery-3.4.1.js"></script>
 <script>
+    layui.config({
+        base: '/static/js/'
+    });
 
-    function getData() {
-        $.ajax({
-            url: '/index/index/getData',
-            data: {
-                'id': 1
+    layui.extend({
+        hxNav: 'hxNav'  // 根据你自己的目录设置
+    }).use(['element','hxNav'],function(){
+        layui.hxNav({
+            element: '#hxNavbar',        // 必须，指定ID
+            url: '/index/menu/getNodes',  // 请求后台数据的接口
+            type: 'post',
+            shrink: true,
+            width: '200',
+            autoExpand: true,
+            selected: 5,
+            onSelect: function(v) {
+                if (v && v.href) {
+                    console.log(v.href);
+                    $('iframe').attr('src', '/index/' + v.href);
+                }
             },
-            type: 'get',
-            dataType: 'json',
-            success:function (res) {
-                console.log(res);
-            }
+        });
 
-        })
-    }
-
-    getData();
-
+    });
 </script>
 </html>
